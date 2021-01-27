@@ -1,6 +1,6 @@
 import 'model.dart';
 
-class Profile1Provider {
+class ProfileProvider {
   static Profile getProfile() {
     return Profile(
         user: User(

@@ -9,7 +9,7 @@ class Profile1 extends StatefulWidget {
 
 class _Profile1State extends State<Profile1> {
 
-  Profile profile=Profile1Provider.getProfile();
+  Profile profile=ProfileProvider.getProfile();
 
   Color textColor =Color(0xFF4e4e4e);
   @override
