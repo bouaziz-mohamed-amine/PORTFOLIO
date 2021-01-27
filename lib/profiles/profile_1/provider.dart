@@ -11,6 +11,7 @@ class ProfileProvider {
         ),
         followers: 2318,
         following: 364,
-        friends: 175);
+        friends: 175,
+    photos: 175);
   }
 }

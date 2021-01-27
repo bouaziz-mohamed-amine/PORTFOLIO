@@ -5,6 +5,6 @@ class User {
 
 class Profile{
   User user;
-  int followers, following, friends;
-  Profile({this.user, this.followers, this.following, this.friends});
+  int followers, following, friends, photos;
+  Profile({this.user, this.followers, this.following, this.friends ,this.photos});
 }
