@@ -12,6 +12,25 @@ class _Profile2State extends State<Profile2> {
   @override
   Profile profile= ProfileProvider.getProfile();
   Color textColor =Color(0xFF4e4e4e);
+  bool visible = false;
+  bool visible2=false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    setState(() {
+      Future.delayed(Duration(milliseconds: 100),(){
+        setState(() {
+          visible = true ;
+
+        });
+      }).then((value) {
+        setState(() {
+          visible2=true;
+        });
+      });
+    });
+  }
   Widget build(BuildContext context) {
     return Stack(
       children: [
@@ -49,15 +68,25 @@ class _Profile2State extends State<Profile2> {
             Stack(
               alignment: AlignmentDirectional.center,
               children: [
-                Container(width: 140,height: 140,decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2),shape: BoxShape.circle)),
-                Container(width: 120,height: 120,decoration: BoxDecoration(color: Colors.grey.withOpacity(0.4),shape: BoxShape.circle)),
-                Container(
-                  width: 100,
-                  height: 100,
-                  decoration: BoxDecoration(
-                    shape:BoxShape.circle ,
-                    image: DecorationImage(fit: BoxFit.cover,
-                      image: ExactAssetImage("assets/shared/amine.jpg",),
+                AnimatedOpacity(
+                  duration: Duration(seconds: 4),
+                    opacity : visible? 1:0,
+                    child: Container(width: 140,height: 140,decoration: BoxDecoration(color: Colors.grey.withOpacity(0.2),shape: BoxShape.circle))),
+                AnimatedOpacity(
+                    duration: Duration(seconds: 3),
+                    opacity: visible ? 1: 0,
+                    child: Container(width: 120,height: 120,decoration: BoxDecoration(color: Colors.grey.withOpacity(0.4),shape: BoxShape.circle))),
+                AnimatedOpacity(
+                  duration: Duration(seconds: 2),
+                  opacity: visible? 1 : 0,
+                  child: Container(
+                    width: 100,
+                    height: 100,
+                    decoration: BoxDecoration(
+                      shape:BoxShape.circle ,
+                      image: DecorationImage(fit: BoxFit.cover,
+                        image: ExactAssetImage("assets/shared/amine.jpg",),
+                      ),
                     ),
                   ),
                 ),
@@ -98,28 +127,32 @@ class _Profile2State extends State<Profile2> {
  Widget _counters() {
     return Padding(
       padding: const EdgeInsets.all(10.0),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              Text("FOLLOWERS",style: TextStyle(color: Colors.grey.shade400),),
-              Text(profile.followers.toString()),
-            ],
-          ),
-          Column(
-            children: [
-              Text("FOLLOWING",style: TextStyle(color: Colors.grey.shade400),),
-              Text(profile.following.toString()),
-            ],
-          ),
-          Column(
-            children: [
-              Text("FRIENDS",style: TextStyle(color: Colors.grey.shade400),),
-              Text(profile.friends.toString()),
-            ],
-          ),
-        ],
+      child: AnimatedOpacity(
+        duration: Duration(milliseconds: 1000),
+        opacity: visible2? 1:0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                Text("FOLLOWERS",style: TextStyle(color: Colors.grey.shade400),),
+                Text(profile.followers.toString()),
+              ],
+            ),
+            Column(
+              children: [
+                Text("FOLLOWING",style: TextStyle(color: Colors.grey.shade400),),
+                Text(profile.following.toString()),
+              ],
+            ),
+            Column(
+              children: [
+                Text("FRIENDS",style: TextStyle(color: Colors.grey.shade400),),
+                Text(profile.friends.toString()),
+              ],
+            ),
+          ],
+        ),
       ),
     );
  }
