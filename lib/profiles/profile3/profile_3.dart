@@ -7,6 +7,7 @@ class Profile3 extends StatefulWidget {
 }
 
 class _Profile3State extends State<Profile3> {
+
   Profile profile= ProfileProvider.getProfile();
   @override
   Widget build(BuildContext context) {
@@ -16,7 +17,7 @@ class _Profile3State extends State<Profile3> {
             image: ExactAssetImage("assets/profiles/profile3.jpg"),
             width: double.infinity,
             height: double.infinity,
-            fit: BoxFit.contain,
+            fit: BoxFit.cover,
           ),
           Scaffold(
             backgroundColor: Colors.transparent,
@@ -54,13 +55,10 @@ class _Profile3State extends State<Profile3> {
         ),
         child: ListView(
           scrollDirection: Axis.vertical,
-          children: [
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Center(
                   child: Padding(
-                    padding: const EdgeInsets.only(top: 75),
+                    padding: const EdgeInsets.only(top: 75,left: 5,right: 5),
                     child: Text(profile.user.name,style: TextStyle(color: Colors.black,fontSize: 24,fontWeight:FontWeight.w900 ),textAlign:TextAlign.center,),
                   ),
                 ),
@@ -106,8 +104,6 @@ class _Profile3State extends State<Profile3> {
                 ),
                 ... _about()
 
-              ],
-            ),
           ],
         ),
         ),

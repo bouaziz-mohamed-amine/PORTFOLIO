@@ -18,7 +18,13 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: Profile3(),
+      home: PageView(
+        children: [
+          Profile1(),
+          Profile2(),
+          Profile3(),
+        ],
+      ),
     );
   }
 }

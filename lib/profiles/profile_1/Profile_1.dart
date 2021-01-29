@@ -8,10 +8,22 @@ class Profile1 extends StatefulWidget {
 }
 
 class _Profile1State extends State<Profile1> {
-
   Profile profile=ProfileProvider.getProfile();
-
   Color textColor =Color(0xFF4e4e4e);
+  bool _visible= false;
+  bool _position=false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(milliseconds:200),(){
+      setState(() {
+        _visible=true;
+        _position=true;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
 
@@ -58,12 +70,17 @@ class _Profile1State extends State<Profile1> {
                         painter: ProfilePainter(),
                         child: Container(),
                       ),
-                      Positioned(
+                      AnimatedPositioned(
+                        duration: Duration(seconds: 1),
                         left: MediaQuery.of(context).size.width*0.05,
-                        top: MediaQuery.of(context).size.height*0.15,
-                        child: CircleAvatar(
-                          minRadius: 45,
-                          backgroundImage: ExactAssetImage("assets/shared/amine.jpg",),
+                        top: _position ? MediaQuery.of(context).size.height*0.15: 0,
+                        child: AnimatedOpacity(
+                          duration:  Duration(seconds:1),
+                          opacity: _visible? 1 :0,
+                          child: CircleAvatar(
+                            minRadius: 45,
+                            backgroundImage: ExactAssetImage("assets/shared/amine.jpg",),
+                          ),
                         ),
                       ),
                       _bodyText(),
@@ -81,28 +98,32 @@ class _Profile1State extends State<Profile1> {
       bottom: MediaQuery.of(context).size.height*0.05,
       left: MediaQuery.of(context).size.width*0.05,
       right:  MediaQuery.of(context).size.width*0.05,
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          Column(
-            children: [
-              Text("FOLLOWERS",style: TextStyle(color: Colors.grey.shade400),),
-              Text(profile.followers.toString()),
-            ],
-          ),
-          Column(
-            children: [
-              Text("FOLLOWING",style: TextStyle(color: Colors.grey.shade400),),
-              Text(profile.following.toString()),
-            ],
-          ),
-          Column(
-            children: [
-              Text("FRIENDS",style: TextStyle(color: Colors.grey.shade400),),
-              Text(profile.friends.toString()),
-            ],
-          ),
-        ],
+      child: AnimatedOpacity(
+        duration: Duration(seconds: 1),
+        opacity: _visible? 1:0,
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          children: [
+            Column(
+              children: [
+                Text("FOLLOWERS",style: TextStyle(color: Colors.grey.shade400),),
+                Text(profile.followers.toString()),
+              ],
+            ),
+            Column(
+              children: [
+                Text("FOLLOWING",style: TextStyle(color: Colors.grey.shade400),),
+                Text(profile.following.toString()),
+              ],
+            ),
+            Column(
+              children: [
+                Text("FRIENDS",style: TextStyle(color: Colors.grey.shade400),),
+                Text(profile.friends.toString()),
+              ],
+            ),
+          ],
+        ),
       ),) ;
   }
 
@@ -161,6 +182,8 @@ Widget  _bodyText() {
     );
 }
 }
+
+
 class ProfilePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
