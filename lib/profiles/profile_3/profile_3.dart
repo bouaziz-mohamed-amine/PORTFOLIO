@@ -152,12 +152,12 @@ class _Profile3State extends State<Profile3> {
       child: MaterialButton(
         color: Colors.deepOrange,
           onPressed: (){},
-
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
           child: AnimatedPadding(
               duration: Duration(milliseconds: 1000),
               padding: EdgeInsets.symmetric(horizontal: visible?15 :2, vertical: 15),
               child: Text("FOLLOW",style: TextStyle(color: Colors.white),)),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+
       ),
     );
  }
