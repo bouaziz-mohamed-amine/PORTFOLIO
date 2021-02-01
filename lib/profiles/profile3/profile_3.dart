@@ -9,6 +9,23 @@ class Profile3 extends StatefulWidget {
 class _Profile3State extends State<Profile3> {
 
   Profile profile= ProfileProvider.getProfile();
+  bool visible = false;
+  bool visible2 = false;
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    Future.delayed(Duration(milliseconds: 200),(){
+      setState(() {
+        visible=true;
+      });
+    });
+    Future.delayed(Duration(milliseconds: 400),(){
+      setState(() {
+        visible2=true;
+      });
+    });
+  }
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -110,14 +127,21 @@ class _Profile3State extends State<Profile3> {
       );
   }
   Widget _profileimage() {
-    return Positioned(
-      top:  MediaQuery.of(context).size.height*0.1 - 50,
+    double fianlPosition=MediaQuery.of(context).size.height*0.1 - 50;
+    double startPosition=0;
+    return AnimatedPositioned(
+      duration: Duration(seconds: 1),
+      top:  visible? fianlPosition : startPosition,
       left:  MediaQuery.of(context).size.width*0.5 - 50 ,
-      child: Container(
-        width: 100,
-        height: 100,
-        child: CircleAvatar(
-          backgroundImage: ExactAssetImage("assets/shared/amine.jpg"),
+      child: AnimatedOpacity(
+        duration: Duration(seconds: 1),
+        opacity: visible?  1 : 0,
+        child: Container(
+          width: 100,
+          height: 100,
+          child: CircleAvatar(
+            backgroundImage: ExactAssetImage("assets/shared/amine.jpg"),
+          ),
         ),
       ),
     );
@@ -128,8 +152,11 @@ class _Profile3State extends State<Profile3> {
       child: MaterialButton(
         color: Colors.deepOrange,
           onPressed: (){},
-        padding: EdgeInsets.symmetric(horizontal: 30,vertical: 15),
-          child: Text("FOLLOW",style: TextStyle(color: Colors.white),),
+
+          child: AnimatedPadding(
+              duration: Duration(milliseconds: 1000),
+              padding: EdgeInsets.symmetric(horizontal: visible?15 :2, vertical: 15),
+              child: Text("FOLLOW",style: TextStyle(color: Colors.white),)),
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
       ),
     );

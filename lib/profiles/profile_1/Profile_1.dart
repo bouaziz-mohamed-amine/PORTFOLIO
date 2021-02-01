@@ -189,6 +189,7 @@ class ProfilePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     Paint paint = Paint();
     Path path = Path();
+
     paint.color = Colors.white;
     path.lineTo(0, size.height * 0.25);
     path.lineTo(size.width, size.height * 0.30);
