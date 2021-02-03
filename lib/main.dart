@@ -3,6 +3,7 @@ import 'package:portfolio_app/profiles/profile_3/profile_3.dart';
 import 'package:portfolio_app/profiles/profile_1/Profile_1.dart';
 import 'package:portfolio_app/profiles/profile_2/profile_2.dart';
 import 'package:portfolio_app/profiles/profile_4/profile_4.dart';
+import 'package:portfolio_app/profiles/profile_5/profile_5.dart';
 
 
 void main() {
@@ -25,6 +26,7 @@ class MyApp extends StatelessWidget {
           Profile2(),
           Profile3(),
           Profile4(),
+          Profile5(),
         ],
       ),
     );
